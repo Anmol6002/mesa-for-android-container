@@ -452,7 +452,7 @@ add_gpus([
         GPUId(610),
         GPUId(612), # TODO: Test it, based only on libwrapfake dumps
         GPUId(613),
-], A6xxGPUInfo(
+    ], A6xxGPUInfo(
         CHIP.A6XX,
         [a6xx_base, a6xx_gen1_low],
         num_ccu = 1,
