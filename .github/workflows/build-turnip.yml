@@ -733,11 +733,11 @@ jobs:
             echo "Building Mesa..."
             cd /home/runner/archlinuxarm-PKGBUILDs/extra/mesa
             
-            # 1. Fetch and extract the source tree without building yet
-            makepkg -o --nobuild --noconfirm
+            # 1. Sync dependencies (-s) and extract the source tree without compiling yet (-o)
+            makepkg -s -o --nobuild --noconfirm
             
             # 2. Locate and patch the extracted tu_device.cc file
-            TARGET_FILE=$(find /home/runner/archlinuxarm-PKGBUILDs/extra/mesa/src -name "tu_device.cc" | grep "freedreno/vulkan" | head -n 1)
+            TARGET_FILE=$(find src/ -name "tu_device.cc" | grep "freedreno/vulkan" | head -n 1)
             if [ -n "$TARGET_FILE" ] && [ -f "$TARGET_FILE" ]; then
                 echo "Found target file in Arch source tree: $TARGET_FILE. Patching..."
                 sed -i 's|props->apiVersion = tu_has_multiview(pdevice) ?|props->apiVersion = TU_API_VERSION; //|g' "$TARGET_FILE"
@@ -753,10 +753,10 @@ jobs:
                 exit 1
             fi
             
-            # 3. Build from existing modified source tree
+            # 3. Build from the modified, existing source tree (-e)
             makepkg -e --noconfirm
             echo "Mesa build completed successfully!"
-          EOF
+          EOF   
 
       - name: Save ccache
         uses: actions/cache/save@v5
