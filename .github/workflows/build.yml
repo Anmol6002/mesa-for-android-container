@@ -54,6 +54,25 @@ jobs:
           git config --global user.name "GitHub Actions"
           git clone -b ${{ github.event.inputs.tag }} --depth 1 ${{ github.server_url }}/${{ github.repository }}.git
 
+      - name: Patch Turnip Driver (tu_device.cc)
+        shell: bash
+        run: |
+          TARGET_FILE="$HOME/mesa-for-android-container/src/freedreno/vulkan/tu_device.cc"
+          if [ -f "$TARGET_FILE" ]; then
+              echo "Found $TARGET_FILE. Applying patches..."
+              sed -i 's|props->apiVersion = tu_has_multiview(pdevice) ?|props->apiVersion = TU_API_VERSION; //|g' "$TARGET_FILE"
+              sed -i 's|return tu_has_multiview(device);|return true;|' "$TARGET_FILE"
+              sed -i 's|return device->info->props.has_hw_multiview \|\| TU_DEBUG(NOCONFORM);|return true;|' "$TARGET_FILE"
+              sed -i 's|if (pdevice->info->chip >= 7)|if (true)|g' "$TARGET_FILE"
+              sed -i 's|pdevice->info->chip >= 7|pdevice->info->chip >= 6|g' "$TARGET_FILE"
+              sed -i 's|pdevice->info->chip >= 8|pdevice->info->chip >= 6|g' "$TARGET_FILE"
+              sed -i 's|device->info->chip >= 7|device->info->chip >= 6|g' "$TARGET_FILE"
+              echo "Patches applied successfully."
+          else
+              echo "ERROR: File $TARGET_FILE not found!"
+              exit 1
+          fi
+
       - name: Set release name suffix
         shell: bash
         run: |
@@ -153,6 +172,25 @@ jobs:
           git config --global user.email "actions@github.com"
           git config --global user.name "GitHub Actions"
           git clone -b ${{ github.event.inputs.tag }} --depth 1 ${{ github.server_url }}/${{ github.repository }}.git
+
+      - name: Patch Turnip Driver (tu_device.cc)
+        shell: bash
+        run: |
+          TARGET_FILE="$HOME/mesa-for-android-container/src/freedreno/vulkan/tu_device.cc"
+          if [ -f "$TARGET_FILE" ]; then
+              echo "Found $TARGET_FILE. Applying patches..."
+              sed -i 's|props->apiVersion = tu_has_multiview(pdevice) ?|props->apiVersion = TU_API_VERSION; //|g' "$TARGET_FILE"
+              sed -i 's|return tu_has_multiview(device);|return true;|' "$TARGET_FILE"
+              sed -i 's|return device->info->props.has_hw_multiview \|\| TU_DEBUG(NOCONFORM);|return true;|' "$TARGET_FILE"
+              sed -i 's|if (pdevice->info->chip >= 7)|if (true)|g' "$TARGET_FILE"
+              sed -i 's|pdevice->info->chip >= 7|pdevice->info->chip >= 6|g' "$TARGET_FILE"
+              sed -i 's|pdevice->info->chip >= 8|pdevice->info->chip >= 6|g' "$TARGET_FILE"
+              sed -i 's|device->info->chip >= 7|device->info->chip >= 6|g' "$TARGET_FILE"
+              echo "Patches applied successfully."
+          else
+              echo "ERROR: File $TARGET_FILE not found!"
+              exit 1
+          fi
 
       - name: Set release name suffix
         shell: bash
@@ -260,6 +298,25 @@ jobs:
           git config --global user.name "GitHub Actions"
           git clone -b ${{ github.event.inputs.tag }} --depth 1 ${{ github.server_url }}/${{ github.repository }}.git
 
+      - name: Patch Turnip Driver (tu_device.cc)
+        shell: bash
+        run: |
+          TARGET_FILE="$HOME/mesa-for-android-container/src/freedreno/vulkan/tu_device.cc"
+          if [ -f "$TARGET_FILE" ]; then
+              echo "Found $TARGET_FILE. Applying patches..."
+              sed -i 's|props->apiVersion = tu_has_multiview(pdevice) ?|props->apiVersion = TU_API_VERSION; //|g' "$TARGET_FILE"
+              sed -i 's|return tu_has_multiview(device);|return true;|' "$TARGET_FILE"
+              sed -i 's|return device->info->props.has_hw_multiview \|\| TU_DEBUG(NOCONFORM);|return true;|' "$TARGET_FILE"
+              sed -i 's|if (pdevice->info->chip >= 7)|if (true)|g' "$TARGET_FILE"
+              sed -i 's|pdevice->info->chip >= 7|pdevice->info->chip >= 6|g' "$TARGET_FILE"
+              sed -i 's|pdevice->info->chip >= 8|pdevice->info->chip >= 6|g' "$TARGET_FILE"
+              sed -i 's|device->info->chip >= 7|device->info->chip >= 6|g' "$TARGET_FILE"
+              echo "Patches applied successfully."
+          else
+              echo "ERROR: File $TARGET_FILE not found!"
+              exit 1
+          fi
+
       - name: Set release name suffix
         shell: bash
         run: |
@@ -363,6 +420,25 @@ jobs:
           git config --global user.email "actions@github.com"
           git config --global user.name "GitHub Actions"
           git clone -b ${{ github.event.inputs.tag }} --depth 1 ${{ github.server_url }}/${{ github.repository }}.git
+
+      - name: Patch Turnip Driver (tu_device.cc)
+        shell: bash
+        run: |
+          TARGET_FILE="$HOME/mesa-for-android-container/src/freedreno/vulkan/tu_device.cc"
+          if [ -f "$TARGET_FILE" ]; then
+              echo "Found $TARGET_FILE. Applying patches..."
+              sed -i 's|props->apiVersion = tu_has_multiview(pdevice) ?|props->apiVersion = TU_API_VERSION; //|g' "$TARGET_FILE"
+              sed -i 's|return tu_has_multiview(device);|return true;|' "$TARGET_FILE"
+              sed -i 's|return device->info->props.has_hw_multiview \|\| TU_DEBUG(NOCONFORM);|return true;|' "$TARGET_FILE"
+              sed -i 's|if (pdevice->info->chip >= 7)|if (true)|g' "$TARGET_FILE"
+              sed -i 's|pdevice->info->chip >= 7|pdevice->info->chip >= 6|g' "$TARGET_FILE"
+              sed -i 's|pdevice->info->chip >= 8|pdevice->info->chip >= 6|g' "$TARGET_FILE"
+              sed -i 's|device->info->chip >= 7|device->info->chip >= 6|g' "$TARGET_FILE"
+              echo "Patches applied successfully."
+          else
+              echo "ERROR: File $TARGET_FILE not found!"
+              exit 1
+          fi
 
       - name: Set release name suffix
         shell: bash
@@ -468,6 +544,25 @@ jobs:
           git config --global user.email "actions@github.com"
           git config --global user.name "GitHub Actions"
           git clone -b ${{ github.event.inputs.tag }} --depth 1 ${{ github.server_url }}/${{ github.repository }}.git
+
+      - name: Patch Turnip Driver (tu_device.cc)
+        shell: bash
+        run: |
+          TARGET_FILE="$HOME/mesa-for-android-container/src/freedreno/vulkan/tu_device.cc"
+          if [ -f "$TARGET_FILE" ]; then
+              echo "Found $TARGET_FILE. Applying patches..."
+              sed -i 's|props->apiVersion = tu_has_multiview(pdevice) ?|props->apiVersion = TU_API_VERSION; //|g' "$TARGET_FILE"
+              sed -i 's|return tu_has_multiview(device);|return true;|' "$TARGET_FILE"
+              sed -i 's|return device->info->props.has_hw_multiview \|\| TU_DEBUG(NOCONFORM);|return true;|' "$TARGET_FILE"
+              sed -i 's|if (pdevice->info->chip >= 7)|if (true)|g' "$TARGET_FILE"
+              sed -i 's|pdevice->info->chip >= 7|pdevice->info->chip >= 6|g' "$TARGET_FILE"
+              sed -i 's|pdevice->info->chip >= 8|pdevice->info->chip >= 6|g' "$TARGET_FILE"
+              sed -i 's|device->info->chip >= 7|device->info->chip >= 6|g' "$TARGET_FILE"
+              echo "Patches applied successfully."
+          else
+              echo "ERROR: File $TARGET_FILE not found!"
+              exit 1
+          fi
 
       - name: Set release name suffix
         shell: bash
@@ -606,6 +701,7 @@ jobs:
             echo "Mesa build completed successfully!"
           '
 
+         
       - name: Save ccache
         uses: actions/cache/save@v5
         if: always()
@@ -616,13 +712,35 @@ jobs:
       - name: Package Mesa
         shell: bash
         run: |
-          echo "Packaging Mesa..."
+          sudo -u runner -i <<'EOF'
+          export CCACHE_DIR=/home/runner/.ccache
+          echo "Building Mesa..."
           cd /home/runner/archlinuxarm-PKGBUILDs/extra/mesa
-          tar -cvf mesa-for-android-container_${MESA_RELEASE_NAME_SUFFIX}.tar *.pkg.tar.xz
-          echo "Calculating sha256 checksums..."
-          find . -maxdepth 1 \( -name "*.tar" \) -type f -printf "%P\0" | xargs -0 sha256sum | sort -k2 > sha256sums.txt
-          cat sha256sums.txt && echo
-          echo "Packaging completed successfully!"
+          
+          # 1. Download and extract the source tree without building yet
+          makepkg -o --nobuild --noconfirm
+          
+          # 2. Find where the tu_device.cc file was extracted and patch it
+          TARGET_FILE=$(find src/ -name "tu_device.cc" | grep "freedreno/vulkan" | head -n 1)
+          if [ -n "$TARGET_FILE" ] && [ -f "$TARGET_FILE" ]; then
+              echo "Found target file in Arch source tree: $TARGET_FILE. Patching..."
+              sed -i 's|props->apiVersion = tu_has_multiview(pdevice) ?|props->apiVersion = TU_API_VERSION; //|g' "$TARGET_FILE"
+              sed -i 's|return tu_has_multiview(device);|return true;|' "$TARGET_FILE"
+              sed -i 's|return device->info->props.has_hw_multiview \|\| TU_DEBUG(NOCONFORM);|return true;|' "$TARGET_FILE"
+              sed -i 's|if (pdevice->info->chip >= 7)|if (true)|g' "$TARGET_FILE"
+              sed -i 's|pdevice->info->chip >= 7|pdevice->info->chip >= 6|g' "$TARGET_FILE"
+              sed -i 's|pdevice->info->chip >= 8|pdevice->info->chip >= 6|g' "$TARGET_FILE"
+              sed -i 's|device->info->chip >= 7|device->info->chip >= 6|g' "$TARGET_FILE"
+              echo "Patches applied successfully."
+          else
+              echo "ERROR: tu_device.cc not found in Arch source tree!"
+              exit 1
+          fi
+          
+          # 3. Build from the modified, already-extracted sources
+          makepkg -e --noconfirm
+          echo "Mesa build completed successfully!"
+          EOF
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v7
@@ -682,6 +800,25 @@ jobs:
           git config --global user.email "actions@github.com"
           git config --global user.name "GitHub Actions"
           git clone -b ${{ github.event.inputs.tag }} --depth 1 ${{ github.server_url }}/${{ github.repository }}.git
+
+      - name: Patch Turnip Driver (tu_device.cc)
+        shell: bash
+        run: |
+          TARGET_FILE="$HOME/mesa-for-android-container/src/freedreno/vulkan/tu_device.cc"
+          if [ -f "$TARGET_FILE" ]; then
+              echo "Found $TARGET_FILE. Applying patches..."
+              sed -i 's|props->apiVersion = tu_has_multiview(pdevice) ?|props->apiVersion = TU_API_VERSION; //|g' "$TARGET_FILE"
+              sed -i 's|return tu_has_multiview(device);|return true;|' "$TARGET_FILE"
+              sed -i 's|return device->info->props.has_hw_multiview \|\| TU_DEBUG(NOCONFORM);|return true;|' "$TARGET_FILE"
+              sed -i 's|if (pdevice->info->chip >= 7)|if (true)|g' "$TARGET_FILE"
+              sed -i 's|pdevice->info->chip >= 7|pdevice->info->chip >= 6|g' "$TARGET_FILE"
+              sed -i 's|pdevice->info->chip >= 8|pdevice->info->chip >= 6|g' "$TARGET_FILE"
+              sed -i 's|device->info->chip >= 7|device->info->chip >= 6|g' "$TARGET_FILE"
+              echo "Patches applied successfully."
+          else
+              echo "ERROR: File $TARGET_FILE not found!"
+              exit 1
+          fi
 
       - name: Set release name suffix
         shell: bash
@@ -767,6 +904,25 @@ jobs:
           git config --global user.email "actions@github.com"
           git config --global user.name "GitHub Actions"
           git clone -b ${{ github.event.inputs.tag }} --depth 1 ${{ github.server_url }}/${{ github.repository }}.git
+
+      - name: Patch Turnip Driver (tu_device.cc)
+        shell: bash
+        run: |
+          TARGET_FILE="$HOME/mesa-for-android-container/src/freedreno/vulkan/tu_device.cc"
+          if [ -f "$TARGET_FILE" ]; then
+              echo "Found $TARGET_FILE. Applying patches..."
+              sed -i 's|props->apiVersion = tu_has_multiview(pdevice) ?|props->apiVersion = TU_API_VERSION; //|g' "$TARGET_FILE"
+              sed -i 's|return tu_has_multiview(device);|return true;|' "$TARGET_FILE"
+              sed -i 's|return device->info->props.has_hw_multiview \|\| TU_DEBUG(NOCONFORM);|return true;|' "$TARGET_FILE"
+              sed -i 's|if (pdevice->info->chip >= 7)|if (true)|g' "$TARGET_FILE"
+              sed -i 's|pdevice->info->chip >= 7|pdevice->info->chip >= 6|g' "$TARGET_FILE"
+              sed -i 's|pdevice->info->chip >= 8|pdevice->info->chip >= 6|g' "$TARGET_FILE"
+              sed -i 's|device->info->chip >= 7|device->info->chip >= 6|g' "$TARGET_FILE"
+              echo "Patches applied successfully."
+          else
+              echo "ERROR: File $TARGET_FILE not found!"
+              exit 1
+          fi
 
       - name: Set release name suffix
         shell: bash
