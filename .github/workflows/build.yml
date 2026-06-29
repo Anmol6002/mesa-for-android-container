@@ -693,25 +693,6 @@ jobs:
       - name: Build Mesa
         shell: bash
         run: |
-          sudo -u runner bash -c '
-            export CCACHE_DIR=/home/runner/.ccache
-            echo "Building Mesa..."
-            cd /home/runner/archlinuxarm-PKGBUILDs/extra/mesa
-            makepkg -s --noconfirm
-            echo "Mesa build completed successfully!"
-          '
-
-         
-      - name: Save ccache
-        uses: actions/cache/save@v5
-        if: always()
-        with:
-          path: /home/runner/.ccache
-          key: ccache-${{ runner.os }}-${{ runner.arch }}-runner-${{ github.run_id }}-${{ github.run_attempt }}
-
-      - name: Package Mesa
-        shell: bash
-        run: |
           sudo -u runner -i <<'EOF'
           export CCACHE_DIR=/home/runner/.ccache
           echo "Building Mesa..."
@@ -741,6 +722,24 @@ jobs:
           makepkg -e --noconfirm
           echo "Mesa build completed successfully!"
           EOF
+        
+      - name: Save ccache
+        uses: actions/cache/save@v5
+        if: always()
+        with:
+          path: /home/runner/.ccache
+          key: ccache-${{ runner.os }}-${{ runner.arch }}-runner-${{ github.run_id }}-${{ github.run_attempt }}
+
+      - name: Package Mesa
+        shell: bash
+        run: |
+          echo "Packaging Mesa..."
+          cd /home/runner/archlinuxarm-PKGBUILDs/extra/mesa
+          tar -cvf mesa-for-android-container_${MESA_RELEASE_NAME_SUFFIX}.tar *.pkg.tar.xz
+          echo "Calculating sha256 checksums..."
+          find . -maxdepth 1 \( -name "*.tar" \) -type f -printf "%P\0" | xargs -0 sha256sum | sort -k2 > sha256sums.txt
+          cat sha256sums.txt && echo
+          echo "Packaging completed successfully!"
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v7
