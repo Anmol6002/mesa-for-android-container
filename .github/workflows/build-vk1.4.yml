@@ -1049,7 +1049,7 @@ jobs:
                 -Dgles2=enabled \
                 -Dglvnd=disabled \
                 -Dglx=dri \
-                -Dllibunwind=disabled \
+                -Dlibunwind=disabled \
                 -Dintel-rt=disabled \
                 -Dmicrosoft-clc=disabled \
                 -Dvalgrind=disabled \
